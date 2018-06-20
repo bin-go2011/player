@@ -3,7 +3,7 @@ CXXFLAGS = -g3 -std=c++14 -D__STDC_CONSTANT_MACROS \
 		   -Wall -Wextra -Wextra -pedantic \
 		   -Wdisabled-optimization -Wctor-dtor-privacy -Wmissing-declarations \
 		   -Woverloaded-virtual -Wshadow -Wno-unused -Winline
-LDLIBS = -lavformat -lavcodec -lavutil -lswscale -lSDL2 -pthread
+LDLIBS = -lavformat -lavcodec -lavutil -lswscale -L /usr/local/Cellar/sdl2/2.0.8/lib/ -lSDL2 -pthread
 
 src = $(wildcard *.cpp)
 obj = $(src:.cpp=.o)

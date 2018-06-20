@@ -1,14 +1,13 @@
 #include "demuxer.h"
-#include "ffmpeg.h"
 
 Demuxer::Demuxer(const std::string &file_name) {
 	av_register_all();
-	ffmpeg::check(avformat_open_input(
-		&format_context_, file_name.c_str(), nullptr, nullptr));
-	ffmpeg::check(avformat_find_stream_info(
-		format_context_, nullptr));
-	video_stream_index_ = ffmpeg::check(av_find_best_stream(
-		format_context_, AVMEDIA_TYPE_VIDEO, -1, -1, nullptr, 0));
+	avformat_open_input(
+		&format_context_, file_name.c_str(), nullptr, nullptr);
+	avformat_find_stream_info(
+		format_context_, nullptr);
+	video_stream_index_ = av_find_best_stream(
+		format_context_, AVMEDIA_TYPE_VIDEO, -1, -1, nullptr, 0);
 }
 
 Demuxer::~Demuxer() {
