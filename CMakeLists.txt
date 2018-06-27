@@ -7,17 +7,17 @@ add_definitions(-g3 -std=c++14 -D__STDC_CONSTANT_MACROS
                 -Woverloaded-virtual -Wshadow -Wno-unused -Winline 
 )
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+
+find_package(SDL2 REQUIRED)
+find_package(FFmpeg REQUIRED)
+
 include_directories(
-    /usr/local/Cellar/sdl2/2.0.8/include
-    /usr/local/Cellar/ffmpeg/4.0.1/include
-)
-link_directories(
-    /usr/local/Cellar/sdl2/2.0.8/lib
-    /usr/local/Cellar/ffmpeg/4.0.1/lib
+        ${SDL2_INCLUDE_DIR}
+        ${FFMPEG_INCLUDE_DIRS}
 )
 
 file(GLOB CPP_SOURCES ${CMAKE_SOURCE_DIR}/*.cpp)
 # list(REMOVE_ITEM CPP_SOURCES ${CMAKE_SOURCE_DIR}/ffmpeg.cpp)
-message(${CPP_SOURCES})
 add_executable(player ${CPP_SOURCES})
-target_link_libraries(player avformat avcodec avutil swscale SDL2 pthread)
+target_link_libraries(player ${FFMPEG_LIBRARIES} ${SDL2_LIBRARY} ${SWSCALE_LIBRARIES})

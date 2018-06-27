@@ -18,3 +18,5 @@ player
 
 build
 .vscode
+cmake-build-debug
+.idea
